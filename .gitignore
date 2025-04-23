@@ -36,3 +36,5 @@ x86
 *.exe
 *.out
 *.app
+
+build
