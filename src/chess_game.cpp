@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 
+#include "Board.h"
 #include "Piece.h"
 
 /*int main() {
@@ -24,11 +25,13 @@
 //   and select the .sln file
 
 int main() {
-  const int BOARD_SIZE = 8;
+  Board board;
   Piece_Classes::King King;  // starts on e1, [5,1]
 
   // king.printLocation();
   // std::cout << "printing king location: " << (int)king.getLocation();
+
+  board.print(false);
 
   return 0;
 }

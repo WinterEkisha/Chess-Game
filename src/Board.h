@@ -2,18 +2,23 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Piece.h"
 
 class Board {
  public:
-  const int SIZE = 8;
+  const size_t SIZE;
 
-  int boardInit();   // initialized the board
-  int boardPrint();  // prints the current board
+  Board() : SIZE(8) {};  // initialize the board with a constructor
+
+  void print(const bool whiteView = true);  // prints the current board
+
+  unsigned algebraicNotationToIndex(const std::string notation);
 
   unsigned char locationToNumber();
 
  private:
   // TODO: maybe useful to store array here for each piece and square
+  std::vector<Piece_Classes::Piece> pieces;
 };
