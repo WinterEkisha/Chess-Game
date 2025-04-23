@@ -3,11 +3,9 @@
 #include <iostream>
 #include <string>
 
-#include "Piece_Classes.h"
+#include "Piece.h"
 
-namespace Board {
-
-class board {
+class Board {
  public:
   const int SIZE = 8;
 
@@ -19,5 +17,3 @@ class board {
  private:
   // TODO: maybe useful to store array here for each piece and square
 };
-
-}  // namespace Board

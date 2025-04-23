@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 
-#include "Piece_Classes.h"
+#include "Piece.h"
 
 /*int main() {
     std::cout << "Hello World!\n";
@@ -25,7 +25,7 @@
 
 int main() {
   const int BOARD_SIZE = 8;
-  Piece_Classes::king king;  // starts on e1, [5,1]
+  Piece_Classes::King King;  // starts on e1, [5,1]
 
   // king.printLocation();
   // std::cout << "printing king location: " << (int)king.getLocation();
