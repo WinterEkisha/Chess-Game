@@ -45,10 +45,10 @@ void Board::parseAlgebraicNotation(const std::string notation) {
   // Check and Checkmate
 
   // Proposed data shapes, possibly make global?
-  struct Square {
-    int row;
-    char col;
-  };
+  //   struct Square {
+  //     int row;
+  //     char col;
+  //   };
 
   enum PieceType {
     KING,
@@ -61,10 +61,34 @@ void Board::parseAlgebraicNotation(const std::string notation) {
     CASTLE_QUEEN,
   };
 
-  enum Modifiers {
+  enum Modifier {
     CHECK,
     CHECKMATE,
     CAPTURE,
     PROMOTION,
   };
+
+  //   PieceType pieceType;
+  //   std::vector<Modifier> modifiers;
+
+  //   if (notation.size() < 2) {
+  //     throw std::domain_error("Notation length must be two or greater.");
+  //   }
+
+  //   char row = notation[notation.size() - 2];
+  //   int col = static_cast<int>(notation[notation.size() - 1]);
+
+  //   if (col < 0 || col > SIZE) {
+  //     throw std::domain_error("Column outside of range");
+  //   }
+
+  //   if (row < 0 || row > SIZE) {
+  //     throw std::domain_error("Row outside of range");
+  //   }
+
+  //   std::cout << "ROW: " << row << "\nCOL: " << col << '\n';
+
+  //   if (notation.size() == 2) {
+  //     pieceType = PAWN;
+  //   }
 };

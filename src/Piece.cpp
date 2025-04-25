@@ -33,7 +33,7 @@ bool Piece::isSpaceOccupied() {  // TODO: (maybe useful for getLegalMove) finish
 }
 
 bool Piece::getLegalMove(unsigned char location) {
-  // std::cout << "Checks if a piece can make specific moove\n";
+  // std::cout << "Checks if a piece can make specific move\n";
   return false;
 }
 
