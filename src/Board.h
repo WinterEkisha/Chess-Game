@@ -14,7 +14,7 @@ class Board {
 
   void print(const bool whiteView = true);  // prints the current board
 
-  unsigned algebraicNotationToIndex(const std::string notation);
+  void parseAlgebraicNotation(const std::string notation);
 
   unsigned char locationToNumber();
 

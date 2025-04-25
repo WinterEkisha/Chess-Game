@@ -36,18 +36,35 @@ void Board::print(const bool whiteView) {
   std::cout << boardStream.str() << std::endl;
 }
 
-unsigned Board::algebraicNotationToIndex(const std::string notation) {
-  // TODO - not working yet
+void Board::parseAlgebraicNotation(const std::string notation) {
+  // Edge cases:
+  // Castling
+  // Disambiguation (two pieces can move to the same row, col, or both)
+  // Captures
+  // Promotions
+  // Check and Checkmate
 
-  //   if (notation.size() != 2) {
-  //     throw std::domain_error("Invalid algebraic notation");
-  //   }
+  // Proposed data shapes, possibly make global?
+  struct Square {
+    int row;
+    char col;
+  };
 
-  //   const int col = notation[0] - 0;
-  //   const int row = notation[1];
+  enum PieceType {
+    KING,
+    QUEEN,
+    ROOK,
+    BISHOP,
+    KNIGHT,
+    PAWN,
+    CASTLE_KING,
+    CASTLE_QUEEN,
+  };
 
-  //   return col * row;
-
-  throw std::runtime_error("not working yet");
-  return 0;
+  enum Modifiers {
+    CHECK,
+    CHECKMATE,
+    CAPTURE,
+    PROMOTION,
+  };
 };
