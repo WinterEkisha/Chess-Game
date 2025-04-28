@@ -5,27 +5,17 @@
 #include <sstream>
 #include <string>
 
-void test_move() {
-  std::string notationInput;
-  std::cout << "Input chess notation (Enter 'q' to QUIT):\n";
-  while (std::cin >> notationInput && notationInput != "q") {
-    try {
-      Move move(notationInput);
-      move.printParsedResults();
-
-    } catch (const std::exception& e) {
-      std::cout << e.what() << '\n';
-      continue;
-    }
-  }
-}
-
+// Populates move with algebraic notation input
 Move::Move(const std::string& notationInput) {
-  if (notationInput.empty()) throw std::domain_error("Empty notation input.");
-  if (notationInput.size() < 2)
-    throw std::domain_error("Notation length must be greater than two.");
+  // First, we take care of edge cases that would cause us to return early.
+  // Throwing an exception is not the best way to do this if we are batch
+  // analyzing chess games, but for a user input loop it makes sense.
 
   notation = notationInput;
+
+  if (notation.empty()) throw std::domain_error("Empty notation input.");
+  if (notation.size() < 2)
+    throw std::domain_error("Notation length must be greater than two.");
 
   // HANDLE CHECKS
   if (notation.back() == '+') {
@@ -48,11 +38,20 @@ Move::Move(const std::string& notationInput) {
     return;
   }
 
-  size_t idx = 0;
+  // Next, come at the input string from both directions because the middle of
+  // the notation is sometimes ambiguous. That way - if both indexes don't meet
+  // by the end - then we know we have a rank and/or file qualifiers.
+
+  size_t fwdIdx = 0;
+  size_t reverseIdx = notation.size() - 1;
+
+  // --------------------
+  // FORWARD SCAN
+  // --------------------
 
   // HANDLE PIECE
-  if (isupper(notation[idx])) {
-    switch (notation[idx]) {
+  if (isupper(notation[fwdIdx])) {
+    switch (notation[fwdIdx]) {
       case 'N':
         pieceType = "knight";
         break;
@@ -71,44 +70,47 @@ Move::Move(const std::string& notationInput) {
       default:
         throw std::domain_error("Unknown piece type.");
     }
-    idx++;
+    fwdIdx++;
   }
 
-  // todo: HANDLE DISAMBIGUATION
-  // sometimes a file or rank comes before 'x' or destination
+  // --------------------
+  // BACKWARD SCAN
+  // --------------------
 
-  // HANDLE CAPTURE
-  if (idx < notation.size() && notation[idx] == 'x') {
-    isCapture = true;
-    idx++;
+  // HANDLE PROMOTION
+  if (notation[reverseIdx] == '=') {
+    throw std::domain_error("Promotion piece missing.");
+  }
+
+  if (std::string("QRBN").find(notation[reverseIdx]) != std::string::npos) {
+    isPromotion = true;
+    promotionPiece = notation[reverseIdx];
+    --reverseIdx;
+    if (reverseIdx >= 0 && notation[reverseIdx] == '=') {
+      --reverseIdx;
+    }
   }
 
   // HANDLE TARGET SQUARE
-  if (idx + 1 >= notation.size()) {
-    throw std::domain_error("Target square missing.");
-  }
-
-  char file = notation[idx];
-  char rank = notation[idx + 1];
+  char rank = notation[reverseIdx];
+  char file = notation[--reverseIdx];
 
   // todo: base on SIZE instead of assumed 8x8 board
   if (file < 'a' || file > 'h') throw std::domain_error("Invalid file letter.");
   if (rank < '1' || rank > '8') throw std::domain_error("Invalid rank number.");
 
-  targetSquareName = std::string(1, file) + std::string(1, rank);
-  idx += 2;
+  targetSquareName = {file, rank};  // brace-initialization
 
-  // HANDLE PROMOTION
-  if (idx < notation.size() && notation[idx] == '=') {
-    idx++;
-    if (idx >= notation.size()) {
-      throw std::domain_error("Promotion piece missing.");
-    }
-    isPromotion = true;
-    promotionPiece = notation[idx];
+  // HANDLE CAPTURE
+  if (--reverseIdx >= fwdIdx && notation[reverseIdx] == 'x') {
+    isCapture = true;
+    --reverseIdx;
   }
 
-  return;
+  // HANDLE DISAMBIGUATION
+  if (fwdIdx <= reverseIdx) {
+    disambiguationId = notation.substr(fwdIdx, reverseIdx);
+  }
 }
 
 void Move::printParsedResults() {
@@ -117,7 +119,11 @@ void Move::printParsedResults() {
   if (pieceType.substr(0, 6) == "castle") {
     output << pieceType << '\n';
   } else {
-    output << pieceType << " moves to " << targetSquareName << '\n';
+    output << pieceType;
+    if (!disambiguationId.empty()) {
+      output << " on " << disambiguationId;
+    }
+    output << " moves to " << targetSquareName << '\n';
   }
 
   if (isCheckmate) {
@@ -134,5 +140,20 @@ void Move::printParsedResults() {
     output << "Promotion to " << promotionPiece << '\n';
   }
 
-  std::cout << output.str() << std::flush;
+  std::cout << output.str() << std::endl;
+}
+
+void test_move() {
+  std::string notationInput;
+  std::cout << "Input chess notation (Enter 'q' to QUIT):\n";
+  while (std::cin >> notationInput && notationInput != "q") {
+    try {
+      Move move(notationInput);
+      move.printParsedResults();
+
+    } catch (const std::exception& e) {
+      std::cout << e.what() << '\n';
+      continue;
+    }
+  }
 }

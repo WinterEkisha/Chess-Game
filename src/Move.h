@@ -16,6 +16,7 @@ struct Move {
   bool isCapture = false;
   bool isPromotion = false;
   std::string promotionPiece = "";
+  std::string disambiguationId = "";
 
   void printParsedResults();
 };

@@ -20,5 +20,3 @@ class Board {
   // TODO: maybe useful to store array here for each piece and square
   std::vector<Piece_Classes::Piece> pieces;
 };
-
-void test_parseAlgebraicNotation();
