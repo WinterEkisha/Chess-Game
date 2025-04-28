@@ -14,11 +14,11 @@ class Board {
 
   void print(const bool whiteView = true);  // prints the current board
 
-  void parseAlgebraicNotation(const std::string notation);
-
   unsigned char locationToNumber();
 
  private:
   // TODO: maybe useful to store array here for each piece and square
   std::vector<Piece_Classes::Piece> pieces;
 };
+
+void test_parseAlgebraicNotation();
