@@ -108,7 +108,7 @@ Move::Move(const std::string& notationInput) {
   }
 
   // HANDLE DISAMBIGUATION
-  if (fwdIdx <= reverseIdx) {
+  if (fwdIdx && fwdIdx <= reverseIdx) {
     disambiguationId = notation.substr(fwdIdx, reverseIdx);
   }
 }
