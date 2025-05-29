@@ -19,7 +19,7 @@ void Board::print(const bool whiteView) {
   for (int i = start_idx; i != end_idx; i += step) {
     boardStream << SIZE - i;
     for (int j = start_idx; j != end_idx; j += step) {
-      boardStream << "[ ]";
+      boardStream << "[ ]"; //TODO: add a way to get which piece should go here
     }
     boardStream << '\n';
   }
@@ -33,4 +33,10 @@ void Board::print(const bool whiteView) {
 
   // prints to console and immediately flushes the buffer
   std::cout << boardStream.str() << std::endl;
+}
+
+Board::Board() : SIZE(8){
+    boardV.resize(SIZE, std::vector<Piece_Classes::Piece>(SIZE));
+    //TODO: for loop for each piece type
+
 }

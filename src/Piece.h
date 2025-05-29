@@ -17,7 +17,7 @@ TODO: could later be optimized to a single variable by using % and /
         eg. (17-1) % 8 + 1 = 1 = A = xLocation
 
 */
-
+//abstract class
 class Piece {
  protected:
   unsigned char xLocation = 0, yLocation = 0, location = 0;
@@ -31,7 +31,7 @@ class Piece {
   void moveTo(unsigned char location);  // moves piece regardless if it is
                                         // occupied or not a legal move
   bool isSpaceOccupied();
-  virtual bool getLegalMove(unsigned char location);
+  virtual bool getLegalMove(unsigned char location) = 0;
 };
 
 class King : public Piece {
@@ -39,6 +39,12 @@ class King : public Piece {
   King();
   King(unsigned char start);
   bool getLegalMove(unsigned char location);
+  /*
+  casteling should be treated as a king move
+  - check if there is no same colored pieces in the way
+  - check the 2 spaces left/right of the king to see if an oposing piece can 'see' it
+  - check if the king is already in check
+  */
 };
 
 class Rook : public Piece {

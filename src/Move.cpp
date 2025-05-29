@@ -5,6 +5,7 @@
 #include <sstream>
 #include <string>
 
+// TODO: Add the ability to take back a move (not currently a thing in std chess notation)
 // Populates move with algebraic notation input
 Move::Move(const std::string& notationInput) {
   // First, we take care of edge cases that would cause us to return early.

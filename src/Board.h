@@ -18,5 +18,6 @@ class Board {
 
  private:
   // TODO: maybe useful to store array here for each piece and square
-  std::vector<Piece_Classes::Piece> pieces;
+	std::vector<std::vector<Piece_Classes::Piece>> boardV;
+
 };
