@@ -4,7 +4,6 @@
 #include <iostream>
 #include <string>
 
-using namespace Piece_Classes;
 
 // King constructor and functions
 

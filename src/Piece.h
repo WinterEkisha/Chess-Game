@@ -3,8 +3,6 @@
 #include <iostream>
 #include <string>
 
-namespace Piece_Classes {
-
 // TODO: 2d array of int maybe easier than char and int,
 //  add virtual functions checkLegalMove(),
 
@@ -63,4 +61,3 @@ class Pawn : public Piece {
  public:
 };
 
-}  // namespace Piece_Classes

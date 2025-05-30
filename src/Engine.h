@@ -15,5 +15,5 @@ private:
 	bool programIsDone = false;
 	boardSize(int size = 8);  //changes size
 	boardReset();  //Resets the board using the current size
-
+	int boardSize;
 };

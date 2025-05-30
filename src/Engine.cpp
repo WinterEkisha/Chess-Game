@@ -1,7 +1,7 @@
 #include "Engine.h"
 
-//Initializes board size, pieces
-//Handles the while loop for input
+//Initializes: board size, pieces
+//Handles: the while loop for input
 Engine::Engine() { 
 	boardSize();
 

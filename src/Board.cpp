@@ -36,7 +36,33 @@ void Board::print(const bool whiteView) {
 }
 
 Board::Board() : SIZE(8){
-    boardV.resize(SIZE, std::vector<Piece_Classes::Piece>(SIZE));
+    boardV.resize(SIZE, std::vector<Piece*>(SIZE));
     //TODO: for loop for each piece type
-
+	for (int i = 0; i < SIZE; i++) {
+		//R N B Q K B N Q
+		switch (i) {
+		case 0:
+		boardV[0][i] = new Rook; 
+			break;
+		case 1:
+			//knight
+			break;
+		case 2:
+			//bishop
+			break;
+		case 3:
+			//queen
+		case 4:
+			//king
+		case 5:
+			//bishop
+		case 6:
+			//knight
+		case 7:
+			//rook
+		}
+	}
+	for (int i = 0; i < SIZE; i++) {
+		boardV[1][i] = new Pawn; 
+	}
 }
