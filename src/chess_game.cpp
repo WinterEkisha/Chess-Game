@@ -13,13 +13,14 @@ bool black = false;
 
 int main() {
 	Board board;
-	Piece_Classes::King King;  // starts on e1, [5,1]
+	King King;  // starts on e1, [5,1]
 
 	// king.printLocation();
 	// std::cout << "printing king location: " << (int)king.getLocation();
 
 	board.print(white);
 	
+	board.print(black);
 
   return 0;
 }

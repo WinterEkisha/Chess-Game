@@ -5,6 +5,11 @@
 #include <string>
 
 
+std::string Piece::boardPrintHelper() {
+    return (pieceLetter);
+}
+
+
 // King constructor and functions
 
 // eg. (17-1) / 8 + 1 = 3 = yLocation = numbers
@@ -36,7 +41,7 @@ bool Piece::getLegalMove(unsigned char location) {
   return false;
 }
 
-King::King() {
+King::King() { //TODO: update for b/w
   location = 5;  // universal location for e1
 }
 
@@ -49,3 +54,31 @@ bool King::getLegalMove(unsigned char moveLocation) {
   //  edges will be dealt with out side of this function as well
   return false;
 }
+
+Rook::Rook(bool pieceColor = true) {
+    location = 0;
+    pieceLetter = "R";
+}
+
+Bishop::Bishop(bool pieceColor = true) { //TODO: finish
+    location = 0;
+    pieceLetter = "B";
+}
+
+Knight::Knight(bool pieceColor = true) { //TODO: finish
+    location = 0;
+    pieceLetter = "N";
+}
+
+Queen::Queen(bool pieceColor = true) { //TODO: finish
+    location = 0;
+    pieceLetter = "Q";
+}
+
+Pawn::Pawn(bool pieceColor = true) { //TODO: finish
+    location = 0;
+    pieceLetter = "P";
+}
+
+
+

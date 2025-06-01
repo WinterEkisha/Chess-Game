@@ -8,9 +8,9 @@
 
 class Board {
  public:
-	const size_t SIZE; 
+	const int SIZE; 
 	
-	Board() : SIZE(8) {};  // initialize the board with a constructor
+	Board();  // initialize the board with a constructor
 	
 	void print(const bool whiteView = true);  // prints the current board
 	

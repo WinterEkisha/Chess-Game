@@ -3,9 +3,10 @@
 //Initializes: board size, pieces
 //Handles: the while loop for input
 Engine::Engine() { 
-	boardSize();
+//	boardSize();
 
 	while(!programIsDone) {
+		//TODO:
 		//take input
 		//update board
 		//print board
